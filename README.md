@@ -12,6 +12,8 @@ with [`opentelemetry_phoenix`][0] and [`opentelemetry_ecto`][1].
 
 Sign up to SigNoz Cloud and get your ingest endpoint and access token from the settings.
 
+Set up your :opentelemetry application config similarly to how it is in the runtime.exs file.
+
 Edit the .env file to add the SIGNOZ env vars.
 
 Assuming you already have Docker and Docker Compose installed:
