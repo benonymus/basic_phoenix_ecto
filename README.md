@@ -1,4 +1,4 @@
-# SigNoz Phoenix + Ecto OpenTelemetry Example
+# Phoenix + Ecto OpenTelemetry + SigNoz Example
 
 This is a example repository (largely based on the officaial otel elixir example application) that demo how to setup OpenTelemetry for Phoenix application
 with [`opentelemetry_phoenix`][0] and [`opentelemetry_ecto`][1].
@@ -16,10 +16,11 @@ Edit the .env file to add the SIGNOZ env vars.
 
 Assuming you already have Docker and Docker Compose installed:
 
-1. Run `docker compose up -d` to start the PostgreSQL.
+1. Run `docker compose up -d` to start PostgreSQL.
 2. Run deps get and ecto setup:
    ```
-   mix deps.get, ecto.setup
+   mix deps.get
+   mix ecto.setup
    ```
 3. Start phoenix `OTEL_SERVICE_NAME=demo iex -S mix phx.server`
 
@@ -28,5 +29,5 @@ Assuming you already have Docker and Docker Compose installed:
 - Visit http://localhost:4000/posts to see how it works for Phoenix HTML
 - Visit http://localhost:4000/users to see how it works for Phoenix LiveView
 
-5. Visit your SigNoz instance and go to /traces to look the the traces.
+5. Visit your SigNoz instance, and go to /traces to see the traces.
 6. Run `docker compose down` to destroy the created resources.
