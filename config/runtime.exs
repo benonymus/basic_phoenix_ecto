@@ -12,6 +12,24 @@ if System.get_env("PHX_SERVER") && System.get_env("RELEASE_NAME") do
   config :demo, DemoWeb.Endpoint, server: true
 end
 
+if config_env() == :dev, do: Envar.load(".env")
+
+# in a prod app you would have separate config for dev and prod or would have this turned off in dev,
+# for the demo purposes there is a single one here
+config :opentelemetry, :processors,
+  otel_batch_processor: %{
+    # Example configuration to directly export to SigNoz
+    exporter: {
+      :opentelemetry_exporter,
+      %{
+        endpoints: ["https://ingest.#{System.get_env("SIGNOZ_REGION")}.signoz.cloud:443"],
+        headers: [
+          {"signoz-access-token", System.get_env("SIGNOZ_ACCESS_TOKEN")}
+        ]
+      }
+    }
+  }
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||
@@ -54,45 +72,6 @@ if config_env() == :prod do
       port: port
     ],
     secret_key_base: secret_key_base
-
-  config :opentelemetry, :processors,
-    otel_batch_processor: %{
-      # Using `otel` here since we are starting through docker-compose where
-      # otel refer to the hostname of the OpenCollector,
-      #
-      # If you are running it locally, kindly change it to the correct
-      # hostname such as `localhost`, `0.0.0.0` and etc.
-      exporter: {:opentelemetry_exporter, %{endpoints: ["http://otel:4318"]}}
-
-      # Example configuration to directly export to Honeycomb.io
-      # exporter: {
-      #   :opentelemetry_exporter, %{
-      #     endpoints: ["https://api.honeycomb.io:443"],
-      #     headers: [
-      #       {"x-honeycomb-team", System.get_env("HONEYCOMB_TEAM")},
-      #       {"x-honeycomb-dataset", System.get_env("HONEYCOMB_DATASET") || "demo"}
-      #     ]
-      #   }
-      # }
-
-      # Example configuration to directly export to Lightstep.com
-      #
-      # Since Lightstep has a different OTLP trace endpoint, we are going need
-      # to configure it in a separate configuration.
-      # exporter: {
-      #   :opentelemetry_exporter, %{}
-      # }
-    }
-
-  # Example configuration for Lightstep.com, for more refers to:
-  # https://github.com/open-telemetry/opentelemetry-erlang/tree/main/apps/opentelemetry_exporter#application-environment
-  # config :opentelemetry_exporter,
-  #   # You can also configure the compression type for exporting traces.
-  #   oltp_traces_compression: :gzip,
-  #   otlp_traces_endpoint: "https://ingest.lightstep.com:443/traces/otlp/v0.9",
-  #   otlp_headers: [
-  #     {"lightstep-access-token", System.get_env("LIGHTSTEP_ACCESS_TOKEN")}
-  #   ]
 
   # ## Using releases
   #

@@ -55,7 +55,8 @@ defmodule Demo.MixProject do
       {:opentelemetry_semantic_conventions, "~> 0.2"},
       {:opentelemetry_cowboy, "~> 0.2.1"},
       {:opentelemetry_phoenix, "~> 1.1"},
-      {:opentelemetry_ecto, "~> 1.1"}
+      {:opentelemetry_ecto, "~> 1.1"},
+      {:envar, "~> 1.1.0"}
     ]
   end
 
