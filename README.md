@@ -1,10 +1,14 @@
-# SigNoz Phoenix + Ecto OpenTelemetry Example
+# Phoenix + Ecto OpenTelemetry + SigNoz Example
 
-This is a example repository (largely based on the officaial otel elixir example application) that demo how to setup OpenTelemetry for Phoenix application
-with [`opentelemetry_phoenix`][0] and [`opentelemetry_ecto`][1].
+This is an example repository (largely based on the official otel elixir example application) that demo how to setup OpenTelemetry for a Phoenix application
+with [`opentelemetry_phoenix`] and [`opentelemetry_ecto`].
 
-Here, we are using [`opentelemetry_exporter`][2] to export the traces to [
-OpenTelemetry Collector][3]. The collector in turn export the traces to [SigNoz].
+- Export to OpenTelemetry Collector, which can then be configured to export to
+  external services (SigNoz).
+
+  ```
+  Application --> OpenTelemetry Collector --> SigNoz
+  ```
 
 ## Getting Stated
 
@@ -29,28 +33,5 @@ Assuming you already have Docker and Docker Compose installed:
 - Visit http://localhost:4000/posts to see how it works for Phoenix HTML
 - Visit http://localhost:4000/users to see how it works for Phoenix LiveView
 
-5. Visit your SigNoz instance and go to /traces to look the the traces.
+5. Visit your SigNoz instance and go to /traces to see the traces.
 6. Run `docker compose down` to destroy the created resources.
-
-## Different ways to export traces
-
-In general, there are 2 ways you can export your OpenTelemetry traces.
-
-- Export to OpenTelemetry Collector, which can then be configured to export to
-  external services.
-
-  ```
-  Application --> OpenTelemetry Collector --> SigNoz
-                                      |-----> SigNoz
-  ```
-
-- Export directly to external services that accept OTLP protocol.
-
-  ```
-  Application --> External Service
-  ```
-
-[0]: https://hex.pm/packages/opentelemetry_phoenix
-[1]: https://hex.pm/packages/opentelemetry_ecto
-[2]: https://hex.pm/packages/opentelemetry_exporter
-[3]: https://github.com/open-telemetry/opentelemetry-collector/
