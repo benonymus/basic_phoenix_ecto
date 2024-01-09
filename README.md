@@ -14,7 +14,7 @@ with [`opentelemetry_phoenix`] and [`opentelemetry_ecto`].
 
 Sign up to SigNoz Cloud and get your ingest endpoint and access token from the settings.
 
-Tweak the otel-collector-config.yaml with your SigNoz ingest endpoint and access token as per: https://signoz.io/docs/tutorial/opentelemetry-binary-usage-in-virtual-machine/
+Tweak/add the `otel-collector-config.yaml` with your SigNoz ingest endpoint and access token as per: https://signoz.io/docs/tutorial/opentelemetry-binary-usage-in-virtual-machine/
 
 By default, we only configure our OpenTelemetry collector to export traces to SigNoz Cloud.
 
