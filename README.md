@@ -1,6 +1,6 @@
 # Phoenix + Ecto OpenTelemetry + SigNoz Example
 
-This is a example repository (largely based on the officaial otel elixir example application) that demo how to setup OpenTelemetry for Phoenix application
+This is an example repository (largely based on the officaial otel elixir example application) that demo how to setup OpenTelemetry for a Phoenix application
 with [`opentelemetry_phoenix`][0] and [`opentelemetry_ecto`][1].
 
 - Here we directly export to external services (SigNoz) that accept OTLP protocol.
